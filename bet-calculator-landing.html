@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bet Calculator – Free, Pro & Enterprise</title>
+  <meta name="description" content="The most accurate online bet calculator. Free for punters, powerful Pro tools, and Enterprise-grade verification for operators.">
+  <style>
+    :root{
+      --bg:#0b0f14; --bg-soft:#0f1620; --card:#121a24; --muted:#7c8aa0; --text:#eaf2ff; --accent:#3b82f6; --accent-2:#22c55e; --warn:#f59e0b; --shadow:0 10px 30px rgba(0,0,0,.35)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji"}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .btn{display:inline-block;padding:14px 20px;border-radius:12px;font-weight:700;line-height:1;transition:.2s;cursor:pointer;white-space:nowrap}
+    .btn-primary{background:var(--accent);color:#fff;box-shadow:var(--shadow)}
+    .btn-secondary{background:transparent;border:1px solid #2a3a52;color:#cfe0ff}
+    .btn-ghost{background:transparent;color:#cfe0ff}
+    .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#0d223f;color:#a7c4ff;font-size:12px;border:1px solid #1c3357}
+    .grid{display:grid;gap:22px}
+    .card{background:linear-gradient(180deg,var(--card),#0e1520);border:1px solid #182336;border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+    .muted{color:var(--muted)}
+    .section{padding:64px 0}
+    .section-tight{padding:40px 0}
+    .section + .section{border-top:1px solid #132033;background:linear-gradient(180deg,#0b0f1400,#0b0f1414)}
+    .center{text-align:center}
+    .chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .hero{position:relative;padding:96px 0 72px;background:radial-gradient(1200px 500px at 50% -20%, #153259 0, #0b0f14 60%) }
+    .hero h1{font-size:clamp(32px,5vw,52px);line-height:1.05;margin:14px 0 10px}
+    .hero p{font-size:clamp(16px,2.4vw,20px);color:#cfe0ff;max-width:900px;margin:0 auto 24px}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .hero .metric{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+    .metric .pill{background:#0d1320;border:1px solid #1a2841;border-radius:12px;padding:12px 16px;color:#b7c7e6}
+
+    .twocol{display:grid;grid-template-columns:1fr;gap:24px}
+    @media(min-width:900px){.twocol{grid-template-columns:1fr 1fr}}
+
+    .features .item{display:flex;gap:14px}
+    .features .icon{width:28px;height:28px;border-radius:8px;display:inline-grid;place-items:center;background:#0f2747;border:1px solid #1f3353}
+
+    .pricing{grid-template-columns:1fr;align-items:stretch}
+    @media(min-width:900px){.pricing{grid-template-columns:repeat(3,1fr)}}
+    .price{font-size:32px;font-weight:900}
+    .price small{font-size:14px;color:var(--muted);font-weight:600}
+    .plan{position:relative}
+    .plan.popular{outline:2px solid var(--accent);}
+    .plan .badge{position:absolute;top:-12px;right:16px}
+
+    .logos{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;opacity:.9}
+    .logo{height:36px;width:auto;filter:grayscale(1) contrast(1.2);opacity:.7}
+
+    .shots{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:900px){.shots{grid-template-columns:1fr 1fr 1fr}}
+    .shot{aspect-ratio:16/10;background:linear-gradient(180deg,#0c1626,#0a111a);border:1px dashed #24405e;border-radius:14px;display:grid;place-items:center;color:#89a6d9}
+
+    .footer{padding:40px 0;color:#a9bbd8}
+    .footer a{color:#d7e6ff}
+
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;background:#0d1320;border:1px solid #213452;border-radius:8px;padding:2px 8px;color:#cfe0ff}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="section-tight" style="position:sticky;top:0;background:rgba(11,15,20,.7);backdrop-filter:blur(8px);z-index:10;border-bottom:1px solid #132033">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <a href="#" style="display:flex;align-items:center;gap:10px;font-weight:900">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 12c0-4.97 4.03-9 9-9 1.89 0 3.64.58 5.09 1.57l-2.29 2.29A6 6 0 0 0 12 6C8.69 6 6 8.69 6 12s2.69 6 6 6a6 6 0 0 0 5.86-4.5H22A9 9 0 0 1 3 12Z" fill="#5fa8ff"/></svg>
+        <span>Bet Calculator</span>
+      </a>
+      <nav style="display:flex;gap:16px;align-items:center">
+        <a class="btn btn-ghost" href="#features">Features</a>
+        <a class="btn btn-ghost" href="#pricing">Pricing</a>
+        <a class="btn btn-ghost" href="#enterprise">Enterprise</a>
+        <a class="btn btn-primary" href="#demo">Start Free</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container center">
+      <span class="tag">Free for punters • Powerful for pros • Enterprise-ready</span>
+      <h1>The Most Accurate Bet Calculator Online</h1>
+      <p>Check your returns instantly from singles to Goliaths. Handle Rule 4, dead-heats, joint-favs and complex perms with confidence. Trusted by punters, matched bettors and bookmaker audit teams.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#demo">Start Calculating Free</a>
+        <a class="btn btn-secondary" href="#enterprise">For Businesses</a>
+      </div>
+      <div class="metric">
+        <div class="pill">⚡ Fast & precise calculations</div>
+        <div class="pill">🧮 All major odds formats</div>
+        <div class="pill">🛡️ Enterprise verification tools</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM / VALUE -->
+  <section class="section" id="features">
+    <div class="container twocol">
+      <div class="card">
+        <h2>Punters & Power Users</h2>
+        <p class="muted">Bookmaker calculators often fail with complex bets. Get accurate returns with full support for each-way, permutations, dead-heats and Rule 4 deductions.</p>
+        <div class="grid features" style="grid-template-columns:1fr;gap:14px;margin-top:12px">
+          <div class="item"><span class="icon">🎯</span><div>Singles → Goliaths, all odds formats</div></div>
+          <div class="item"><span class="icon">🧩</span><div>Perms up to 20-fold • partial outcomes (½ win/void)</div></div>
+          <div class="item"><span class="icon">📈</span><div>Hedge, lay & cash-out calculators (Pro)</div></div>
+          <div class="item"><span class="icon">💾</span><div>CSV/XLSX import & export (Pro)</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Businesses & Audit Teams</h2>
+        <p class="muted">Settlement errors cost money and trust. Use an independent, configurable calculator to verify results at scale—and keep an audit trail for compliance.</p>
+        <div class="grid features" style="grid-template-columns:1fr;gap:14px;margin-top:12px">
+          <div class="item"><span class="icon">🏭</span><div>Bulk verification (1k+ bets) with pass/fail</div></div>
+          <div class="item"><span class="icon">⚙️</span><div>Custom house rules (Rule 4, tie rules, dead-heat policy)</div></div>
+          <div class="item"><span class="icon">🔗</span><div>API & white-label widgets for CS/trading tools</div></div>
+          <div class="item"><span class="icon">📜</span><div>Audit-ready PDF/Excel reports</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO / EMBED PLACEHOLDER -->
+  <section class="section" id="demo">
+    <div class="container">
+      <div class="card center">
+        <h2>Try It Now – Free Calculator</h2>
+        <p class="muted">Drop your React widget here when hosted (iframe or script embed). For now, this panel shows a visual placeholder.</p>
+        <div class="shot" style="margin-top:12px">
+          <div>
+            <div style="font-weight:700;margin-bottom:6px">[ Calculator Embed Placeholder ]</div>
+            <div class="muted">Connect to <span class="kbd">/calculator</span> when deployed.</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-primary" href="#pricing">See Pricing</a>
+          <a class="btn btn-secondary" href="#enterprise">Book a Business Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="container center">
+      <h2>Simple Pricing</h2>
+      <p class="muted">Start free. Upgrade when you need advanced tools or business-grade verification.</p>
+      <div class="grid pricing" style="margin-top:22px">
+        <!-- Free -->
+        <div class="card plan">
+          <h3>Free</h3>
+          <p class="muted">For casual punters</p>
+          <div class="price">£0 <small>/ forever</small></div>
+          <ul class="muted" style="text-align:left;line-height:1.9">
+            <li>Core bet calculator (Singles → Lucky 31)</li>
+            <li>Fractional • Decimal • American odds</li>
+            <li>Basic EW, Rule 4 & dead-heat support</li>
+            <li>Affiliate offers & odds links</li>
+          </ul>
+          <a class="btn btn-primary" href="#demo">Start Free</a>
+        </div>
+        <!-- Pro -->
+        <div class="card plan popular">
+          <span class="badge tag">Most Popular</span>
+          <h3>Pro</h3>
+          <p class="muted">For power users & matched bettors</p>
+          <div class="price">£7.99 <small>/ month</small></div>
+          <ul class="muted" style="text-align:left;line-height:1.9">
+            <li>All bet types (up to Goliath)</li>
+            <li>Perms to 20-fold • partial outcomes</li>
+            <li>CSV/XLSX import & export</li>
+            <li>Hedge, lay & cash-out calculators</li>
+            <li>Ad-free experience</li>
+          </ul>
+          <a class="btn btn-primary" href="#demo">Upgrade to Pro</a>
+        </div>
+        <!-- Enterprise -->
+        <div class="card plan" id="enterprise">
+          <h3>Enterprise</h3>
+          <p class="muted">For operators, trading & audit teams</p>
+          <div class="price">Custom <small>/ SaaS</small></div>
+          <ul class="muted" style="text-align:left;line-height:1.9">
+            <li>Bulk bet verification (1k+ per run)</li>
+            <li>API & white‑label widgets</li>
+            <li>Custom house rules configuration</li>
+            <li>Audit-ready PDF/Excel reports</li>
+            <li>Support & SLAs</li>
+          </ul>
+          <a class="btn btn-secondary" href="#contact">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS / MOCKS -->
+  <section class="section">
+    <div class="container">
+      <h2 class="center">How It Looks</h2>
+      <p class="center muted">A few UI mock placeholders you can replace with real screenshots later.</p>
+      <div class="shots" style="margin-top:16px">
+        <div class="shot">Betslip → Payout result</div>
+        <div class="shot">CSV import (Pro)</div>
+        <div class="shot">Enterprise audit report</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="section">
+    <div class="container center">
+      <h2>Trusted by Punters & Businesses</h2>
+      <div class="logos" style="margin-top:14px">
+        <img class="logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='40'%3E%3Crect width='180' height='40' rx='6' fill='%2323364d'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2389a6d9' font-family='Arial' font-size='16'%3EYour logo%3C/text%3E%3C/svg%3E" alt="Logo placeholder"/>
+        <img class="logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='40'%3E%3Crect width='180' height='40' rx='6' fill='%2323364d'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2389a6d9' font-family='Arial' font-size='16'%3EYour logo%3C/text%3E%3C/svg%3E" alt="Logo placeholder"/>
+        <img class="logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='40'%3E%3Crect width='180' height='40' rx='6' fill='%2323364d'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2389a6d9' font-family='Arial' font-size='16'%3EYour logo%3C/text%3E%3C/svg%3E" alt="Logo placeholder"/>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr;gap:16px;margin-top:22px">
+        <div class="card">“Best calculator I’ve used for complex accas. Finally accurate.” — <span class="muted">User review</span></div>
+        <div class="card">“Helped our audit team catch settlement discrepancies.” — <span class="muted">Operator</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container center">
+      <h2>Ready to calculate with 100% confidence?</h2>
+      <div style="margin-top:10px" class="hero-cta">
+        <a class="btn btn-primary" href="#demo">Start Free</a>
+        <a class="btn btn-secondary" href="#enterprise">Book Business Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" style="display:grid;gap:14px;grid-template-columns:1fr;align-items:center;justify-items:center;text-align:center">
+      <div class="muted">© <span id="year"></span> Bet Calculator • All rights reserved</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </div>
+      <div class="muted" style="font-size:13px">This site uses affiliate links. Odds shown are for information only.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
